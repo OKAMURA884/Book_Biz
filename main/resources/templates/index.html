@@ -1,0 +1,50 @@
+ <!DOCTYPE>
+    <html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>顧客一覧</title>
+      </head>
+      <body>
+ <h2>顧客一覧</h2>
+ 
+	    <table border="1">
+      <tr>
+        <td>番号</td>
+        <td>名前</td>
+        <td>メールアドレス</td>
+        <td>パスワード</td>
+        <td>更新</td>
+        <td>削除</td>
+      </tr>
+      
+         <tr th:each="users : ${userlist}">
+      <td th:text="${users.code}"></td>
+      <td th:text="${users.name}"></td>
+      <td th:text="${users.email}"></td>
+      <td th:text="${users.password}"></td>
+      <td>
+           		<form action="update" method="POST">
+              <input type="hidden" name="Code" th:value="${users.code}" />
+              <input type="hidden" name="Name" th:value="${users.name}">
+              <input type="hidden" name="Email" th:value="${users.email}">
+              <input type="hidden" name="Password" th:value="${users.password}">
+              <input type="submit" value="更新">
+            </form>
+          </td>
+          <td>
+            <form action="DELETE" method="POST">
+              <input type="hidden" name="Code" th:value="${users.code}">
+              <input type="submit" value="削除">
+            </form>
+          </td>
+        </tr>
+      </c:forEach>
+    </table>
+   	
+   	 <form action="insert"   name="insert" method="POST">
+		
+		  <a href="javascript:insert.submit()">新規登録</a>
+           
+          </form>
+	</body>
+    </html>

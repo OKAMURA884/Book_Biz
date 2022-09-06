@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>購入完了</title>
+</head>
+<body>
+  <h2>購入完了</h2>
+  <p>購入が完了しました。</p>   
+			<p>
+				 <form action="user-mypage" method="POST">
+ 				   <tr th:each="info : ${userlist}">
+				<input type="submit" value="マイページへ">
+				<input type="hidden" name="user_id" th:value="${info.user_id}">
+		
+			
+			</p>
+				</form>
+		  </c:forEach>
+		  
+		    <tr th:each="info : ${userlist}">
+	    		 <form action="user-top" method="POST">
+			<p>
+				<input type="submit" value="TOPへ">
+				<input type="hidden" name="user_id" th:value="${info.user_id}">
+				<input type="hidden" name="user_name" th:value="${info.user_name}">
+			
+			
+			</p>
+		</form>
+      </c:forEach> 
+     
+ 
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE>
+    <html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>購入履歴</title>
+      </head>
+      
+<header>
+
+	<a id=biz >Book-Biz</a>
+	<p id=icon></p>
+	
+	<form action="user-top" method="POST">
+   <input type="hidden" name="user_id" th:value="${user_id}">
+   <input type="hidden" name="user_name" th:value="${user_name}">
+    <a class="btn_02"> <input id=header-button type="submit"  value="TOP"></a>
+</form>	
+
+<form action="user-mypage" method="POST">
+   <input type="hidden" name="user_id" th:value="${user_id}">
+   <input type="hidden" name="user_name" th:value="${user_name}">
+    <a class="btn_02"> <input id=header-button type="submit"  value="マイページ"></a>
+</form>	
+
+<form action="user-mypage" method="GET">
+    <a class="btn_02"><input type="submit" id=header-button value="ログアウト" formaction="/user-logout"></a>
+    <input type="hidden" name="user_id" th:value="${user_id}">
+</form>	
+
+</header>
+      <body>
+      
+<br>
+<br>
+<br>
+<br>
+
+<div class="form-wrapper">
+  <h1>購入履歴</h1>
+  
+  <td th:text="${error_message}"></td>
+	 		
+		  <th:block th:with="a=${error_message}"><br>
+		<th:block th:if="${a == null}">
+	    <table border="1">
+      <tr>
+        <td id=note>書籍名</td>
+        <td>ISBN</td>
+        <td>カテゴリー</td>
+        <td>状態</td>
+        <td id=note>著者名</td>
+        <td>販売価格</td>
+        <td id=note>商品説明</td>
+        <td>画像</td>
+        <td>購入日</td>
+      </tr>
+      
+          <tr th:each="items : ${itemlist}">
+         
+      <td id=note style="word-break: break-all;"  th:text="${items.subject_name}"></td>
+      <td th:text="${items.subject_isbn}"></td>
+      <td th:text="${items.subject_code}"></td>
+      <td th:text="${items.subject_state}"></td>
+      <td th:text="${items.subject_author}"></td>
+      <td th:text="${items.subject_price} + 円"></td>
+      <td id=note style="word-break: break-all;"  th:text="${items.subject_note}"></td>
+       <td><img th:src="${items.subject_image}" width="90px"  height=auto/></td>
+       <td th:text="${items.subject_registerDay}"></td>
+    </table>
+</th:block>
+
+      </c:forEach>
+   
+      	<br>
+   	  <div class="button-back">
+      <button type="button" class="button_back" onclick="history.back()">戻る</button>
+    </div>  
+    
+    <br>
+</body>
+
+<style>
+section {
+  max-width: 300px;
+  margin: 0 20px;
+}
+a.btn_02 {
+ margin: -2px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #228bc8;
+  box-sizing: border-box;
+  width: 100px;
+  height: 50px;
+  padding: 0 6% 0 12%;
+  color: #228bc8;
+  font-size: 16px;
+  text-align: left;
+  text-decoration: none;
+  position: relative;
+  transition-duration: 0.2s;
+}
+a.btn_02:hover {
+  background: #228bc8;
+  color: #fff;
+}
+a.btn_02:before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 0 7px 8px;
+  border-color: transparent transparent transparent #228bc8;
+  position: absolute;
+  top: 50%;
+  left: 6%;
+  margin-top: -7px;
+}
+a.btn_02:hover:before {
+  border-color: transparent transparent transparent #fff;
+}
+
+header{
+    top: 0; /* 上下の固定位置を上から0pxにする */
+    display: flex; /* 中の要素を横並びにする */
+    background: #fff;
+    display: flex;
+    padding: 10px 10px;
+    position: fixed;
+    width: 100%;
+    height : 60px;
+
+}
+        #biz{
+        font-weight: bold;
+   		font-family: 'FontAwesome', sans-serif;
+		font-size :30px;
+		margin-top:10px;
+		color : #ff0000;
+		background-color : #ffffff;
+	
+}
+ #icon{
+    	background-color : #ffffff;
+		margin:0 0px 0 auto;
+}
+        .container {
+            width: 90%;
+            text-align: center;
+        }
+ 
+        .first-sentence {
+            font-weight: bold;
+        }
+        #header-button{
+background-color : #ffffff;
+border: none;
+ height: 3em;
+  background: transparent; /* 背景の灰色を消す */
+
+}
+        
+/* Fonts */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
+
+/* fontawesome */
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+/* Simple Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* body */
+body {
+  background: #e9e9e9;
+  color: #5e5e5e;
+  font: 400 87.5%/1.5em 'Open Sans', sans-serif;
+}
+
+/* Form Layout */
+.form-wrapper {
+  background: #fafafa;
+  margin: 3em auto;
+  padding: 0 1em;
+  max-width: 1000px;
+}
+
+h1 {
+  text-align: center;
+  padding: 1em 0;
+}
+
+form {
+  padding: 0 1.5em;
+}
+
+.form-item {
+  margin-bottom: 0.75em;
+  width: 100%;
+}
+
+.form-item input {
+  background: #fafafa;
+  border: none;
+  border: 2px solid #e9e9e9;
+  color: #666;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  height: 50px;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.form-item textarea {
+  background: #fafafa;
+  border: none;
+  border: 2px solid #e9e9e9;
+  color: #666;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  height: 50px;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+.form-item select {
+  background: #fafafa;
+  border: none;
+  border: 2px solid #e9e9e9;
+  color: #666;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  height: 50px;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+.form-item input:focus {
+  border-bottom: 2px solid #c0c0c0;
+  outline: none;
+}
+
+.button-panel {
+  margin: 2em 0 0;
+  width: 100%;
+}
+
+
+.button-back .button_back {
+  background: #7F8182;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  height: 50px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2em;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background 0.3s ease-in-out;
+  width: 100px;
+}
+
+.button_back:hover {
+  background: #575859;
+}
+
+
+.form-footer {
+  font-size: 1em;
+  padding: 2em 0;
+  text-align: center;
+}
+
+.form-footer a {
+  color: #8c8c8c;
+  text-decoration: none;
+  transition: border-color 0.3s;
+}
+
+.form-footer a:hover {
+  border-bottom: 1px dotted #8c8c8c;
+}
+
+.required::after {
+content: "必須";
+color: #ffffff;
+background: #cc0000;
+font-size: 0.8em;
+padding: 0.3em;
+border-radius: 0.5em;
+margin-left:0.3em;
+}
+ 
+table {
+	word-wrap: break-word;
+	table-layout: fixed;
+	margin-left: auto;
+    margin-right: auto;
+    word-wrap: break-word;
+    
+}
+
+   
+table td {
+	background: #eee;
+	word-wrap: break-word;
+	table-layout: fixed;
+ 	
+}
+table tr:nth-child(odd) td {
+	background: #fff;
+	word-wrap: break-word;
+}
+
+ #note{
+    word-wrap: break-word;
+	max-width: 100px;
+}
+
+</style>
+</html>
+

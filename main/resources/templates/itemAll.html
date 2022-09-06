@@ -1,0 +1,24 @@
+<!DOCTYPE>
+    <html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>書籍s一覧</title>
+      </head>
+      <body>
+ <h2>書籍一覧</h2>
+ 
+	    <table border="1">
+     
+         <tr th:each="items : ${itemlist}">
+      <td th:text="${items.subject_name}"></td>
+      <td th:text="${items.subject_isbn}"></td>
+      <td th:text="${items.subject_price}"></td>
+      <td th:text="${items.subject_author}"></td>
+      <td th:text="${items.subject_registerDay}"></td>
+       <td th:text="${items.user_id}"></td>
+ 		 <td><img th:src="${items.subject_image}" width="100px"  height=auto/></td>
+           	
+    </table>
+   	
+	</body>
+    </html>
